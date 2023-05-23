@@ -1,25 +1,14 @@
 package tests;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-import pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
-public class RegFormWithPageObj {
-    RegistrationPage page = new RegistrationPage();
-    @BeforeAll
-    static void beforeAll() {
-
-        browser = "chrome";
-        baseUrl = "https://demoqa.com";
-        browserSize = "1920x1080";
-    }
+public class RegFormWithPageObj extends TestBase{
 
     @Test
     void testForm() {
@@ -29,12 +18,10 @@ public class RegFormWithPageObj {
                 .setLastName("Malkovich")
                 .setUserEmail("JohnMalkovich@gmail.com")
                 .setPhoneNumber("4441122345")
-                .setGender("Female");
+                .setGender("Female")
+                .setBirthDate("01", "February", "1994");
 
-        //Select all data in 'Date of Birth' field
-        $("#dateOfBirthInput").sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        //append a birth date to the 'Date of Birth' field and press enter
-        $("#dateOfBirthInput").append("02 FEB 1990").pressEnter();
+
         //add data to the 'Subjects' field
         $("#subjectsInput").setValue("Maths").pressEnter().setValue("Physics").pressEnter();
         //select all checkboxes of the 'Hobbies' field
@@ -63,8 +50,7 @@ public class RegFormWithPageObj {
         $("#submit").click(); // submit form
 
         //Check that the data is saved
-        $(".modal-dialog").should(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        page.verifyModalResults();
         $(".table-responsive").shouldHave(text("John"))
                 .shouldHave(text("Malkovich"))
                 .shouldHave(text("JohnMalkovich@gmail.com"))

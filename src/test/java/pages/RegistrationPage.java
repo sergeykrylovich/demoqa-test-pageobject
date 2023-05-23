@@ -1,11 +1,16 @@
 package pages;
 
+import pages.components.CalendarComponent;
+import pages.components.RegistrationResultModal;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
+    CalendarComponent calendarComponent = new CalendarComponent();
+    RegistrationResultModal registrationResultModal = new RegistrationResultModal();
     private static String urnForm = "/automation-practice-form";
 
     public RegistrationPage openPage() {
@@ -43,9 +48,22 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setGender (String userGender) {
-        $("#genterWrapper").$(byText("userGender")).click();
+        $("#genterWrapper").$(byText(userGender)).click();
 
         return this;
     }
 
+    public RegistrationPage setBirthDate (String day, String month, String year) {
+        $("#dateOfBirthInput").click();
+        calendarComponent.setDate(day, month, year);
+
+        return this;
+    }
+
+    public RegistrationPage verifyModalResults () {
+        registrationResultModal.verifyModalAppear();
+
+
+        return this;
+    }
 }
