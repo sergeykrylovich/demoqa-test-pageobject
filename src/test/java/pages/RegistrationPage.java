@@ -79,18 +79,18 @@ public class RegistrationPage {
 //        mapOfHobbies.put("Reading", "2");
 //        mapOfHobbies.put("Music", "3");
 
-        $("[for='hobbies-checkbox-1']").shouldHave(text(hobbie)).click(); // Sports
+        $("#hobbiesWrapper").$(byText(hobbie)).click(); // Sports
 //        $("[for='hobbies-checkbox-2']").click(); // Reading
 //        $("[for='hobbies-checkbox-3']").click(); // Music
 
         return this;
     }
 
-    public RegistrationPage uploadImg (String path) {
+    public RegistrationPage uploadImg (String nameOfImg) {
         //uploading file for picture
         //File file = new File("src/test/resources/img/img.jpg");
         //$("#uploadPicture").uploadFile(file);
-        $("#uploadPicture").uploadFromClasspath(path);
+        $("#uploadPicture").uploadFromClasspath("img/" + nameOfImg);
 
         return this;
     }
@@ -102,8 +102,8 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setCity (String city) {
-        $("#state").click();
-        $("#state").$(byText(city)).click();
+        $("#city").click();
+        $("#city").$(byText(city)).click();
 //        $("#city").click(); //Select State
 //        $("#react-select-4-option-0").click(); // Choose City 'Delhi'
 
@@ -121,7 +121,7 @@ public class RegistrationPage {
 
     public RegistrationPage submitForm () {
         $("#submit").click(); // submit form
-//       $("#submit").click(withTimeout(Duration.ofSeconds(1))); // wait 1 sec and submit
+//        $("#submit").click(withTimeout(Duration.ofSeconds(1)));//  wait 1 sec and submit
         return this;
     }
 

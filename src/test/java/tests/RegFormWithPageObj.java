@@ -2,11 +2,10 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class RegFormWithPageObj extends TestBase{
+    //Input data
     String userName = "John"
             , lastName = "Malkovich"
             , userEmail = "JohnMalkovich@gmail.com"
@@ -17,14 +16,14 @@ public class RegFormWithPageObj extends TestBase{
             , yearOfBirth = "1994"
             , subjectMath = "Math"
             , hobbySport = "Sports"
-            , pathOfImg = "img/img.jpg"
+            , nameOfImg = "img.jpg"
             , address = "17 Dean St, Brooklyn, NY 11201, USA"
-            , city = "NCR"
-            , state = "Delhi";
+            , state = "NCR"
+            , city = "Delhi";
 
     @Test
     void testForm() {
-
+        //Form filling
         page.openPage()
                 .setFirstName(userName)
                 .setLastName(lastName)
@@ -34,7 +33,7 @@ public class RegFormWithPageObj extends TestBase{
                 .setBirthDate(dayOfBirth, monthOfBirth, yearOfBirth)
                 .setSubject(subjectMath)
                 .setHobbies(hobbySport)
-                .uploadImg(pathOfImg)
+                .uploadImg(nameOfImg)
                 .setAddress(address)
                 .setState(state)
                 .setCity(city)
@@ -43,17 +42,17 @@ public class RegFormWithPageObj extends TestBase{
 
         //Check that the data is saved
         page.verifyModalResults()
-                .verifyResults("Student name", "");
-        $(".table-responsive").shouldHave(text("John"))
-                .shouldHave(text("Malkovich"))
-                .shouldHave(text("JohnMalkovich@gmail.com"))
-                .shouldHave(text("4441122345"))
-                .shouldHave(text("1990"))
-                .shouldHave(text("Maths"))
-                .shouldHave(text("NCR "))
-                .shouldHave(text("Delhi"))
-                .shouldHave(text("Sports"))
-                .shouldHave(text("Male"));
+                .verifyResults("Student Name", userName + " " + lastName)
+                .verifyResults("Student Email", userEmail)
+                .verifyResults("Gender", userGender)
+                .verifyResults("Mobile", phoneNumber)
+                .verifyResults("Date of Birth", dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
+                .verifyResults("Subjects", subjectMath)
+                .verifyResults("Hobbies", hobbySport)
+                .verifyResults("Picture", nameOfImg)
+                .verifyResults("Address", address)
+                .verifyResults("State and City", state + " " + city);
+
     }
 }
 
