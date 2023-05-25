@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultModal;
 
@@ -17,6 +18,19 @@ public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
     RegistrationResultModal registrationResultModal = new RegistrationResultModal();
     private static String urlForm = "/automation-practice-form";
+    private final SelenideElement firstNameSelector = $("#firstName")
+            , lastNameSelector = $("#lastName")
+            , userEmailSelector = $("#userEmail")
+            , phoneNumberSelector = $("#userNumber")
+            , genderSelector = $("#genterWrapper")
+            , birthDateSelector = $("#dateOfBirthInput")
+            , subjectSelector = $("#subjectsInput")
+            , hobbiesSelector = $("#hobbiesWrapper")
+            , loadImgSelector = $("#uploadPicture")
+            , addressSelector = $("#currentAddress")
+            , stateSelector = $("#state")
+            , citySelector = $("#city")
+            , submitSelector = $("#submit");
 
     public RegistrationPage openPage() {
         open(urlForm);
@@ -29,37 +43,37 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setFirstName (String firstName) {
-        $("#firstName").setValue(firstName);
+        firstNameSelector.setValue(firstName);
 
         return this;
     }
 
     public RegistrationPage setLastName (String lastName) {
-        $("#lastName").setValue(lastName);
+        lastNameSelector.setValue(lastName);
 
         return this;
     }
 
     public RegistrationPage setUserEmail (String userEmail) {
-        $("#userEmail").setValue(userEmail);
+        userEmailSelector.setValue(userEmail);
 
         return this;
     }
 
     public RegistrationPage setPhoneNumber (String userNumber) {
-        $("#userNumber").setValue(userNumber);
+        phoneNumberSelector.setValue(userNumber);
 
         return this;
     }
 
     public RegistrationPage setGender (String userGender) {
-        $("#genterWrapper").$(byText(userGender)).click();
+        genderSelector.$(byText(userGender)).click();
 
         return this;
     }
 
     public RegistrationPage setBirthDate (String day, String month, String year) {
-        $("#dateOfBirthInput").click();
+        birthDateSelector.click();
         calendarComponent.setDate(day, month, year);
 
         return this;
@@ -67,21 +81,14 @@ public class RegistrationPage {
 
     public RegistrationPage setSubject (String subject) {
         //add data to the 'Subjects' field
-        $("#subjectsInput").setValue(subject).pressEnter();
+        subjectSelector.setValue(subject).pressEnter();
 
         return this;
     }
 
     public RegistrationPage setHobbies (String hobbie) {
         //select all checkboxes of the 'Hobbies' field
-//        HashMap<String, String> mapOfHobbies = new HashMap();
-//        mapOfHobbies.put("Sports", "1");
-//        mapOfHobbies.put("Reading", "2");
-//        mapOfHobbies.put("Music", "3");
-
-        $("#hobbiesWrapper").$(byText(hobbie)).click(); // Sports
-//        $("[for='hobbies-checkbox-2']").click(); // Reading
-//        $("[for='hobbies-checkbox-3']").click(); // Music
+        hobbiesSelector.$(byText(hobbie)).click(); // chose hobbie
 
         return this;
     }
@@ -90,37 +97,37 @@ public class RegistrationPage {
         //uploading file for picture
         //File file = new File("src/test/resources/img/img.jpg");
         //$("#uploadPicture").uploadFile(file);
-        $("#uploadPicture").uploadFromClasspath("img/" + nameOfImg);
+        loadImgSelector.uploadFromClasspath("img/" + nameOfImg);
 
         return this;
     }
 
     public RegistrationPage setAddress (String address) {
-        $("#currentAddress").setValue(address); // Set Current Address
-
-        return this;
-    }
-
-    public RegistrationPage setCity (String city) {
-        $("#city").click();
-        $("#city").$(byText(city)).click();
-//        $("#city").click(); //Select State
-//        $("#react-select-4-option-0").click(); // Choose City 'Delhi'
+        addressSelector.setValue(address); // Set Current Address
 
         return this;
     }
 
     public RegistrationPage setState (String state) {
-        $("#state").click();
-        $("#state").$(byText(state)).click();
+        stateSelector.click();
+        stateSelector.$(byText(state)).click();
 //        $("#state").click(); //Select State
 //        $("#react-select-3-option-0").click(); // Choose State 'NCR'
 
         return this;
     }
 
+    public RegistrationPage setCity (String city) {
+        citySelector.click();
+        citySelector.$(byText(city)).click();
+//        $("#city").click(); //Select State
+//        $("#react-select-4-option-0").click(); // Choose City 'Delhi'
+
+        return this;
+    }
+
     public RegistrationPage submitForm () {
-        $("#submit").click(); // submit form
+        submitSelector.click(); // submit form
 //        $("#submit").click(withTimeout(Duration.ofSeconds(1)));//  wait 1 sec and submit
         return this;
     }

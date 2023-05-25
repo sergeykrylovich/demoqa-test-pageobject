@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class RegFormWithPageObj extends TestBase{
     //Input data
-    String userName = "John"
+    private final String userName = "John"
             , lastName = "Malkovich"
             , userEmail = "JohnMalkovich@gmail.com"
             , phoneNumber = "4441122345"
