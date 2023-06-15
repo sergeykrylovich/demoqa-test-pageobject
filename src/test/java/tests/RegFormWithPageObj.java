@@ -1,25 +1,28 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class RegFormWithPageObj extends TestBase{
     //Input data
-    private final String userName = "John"
-            , lastName = "Malkovich"
-            , userEmail = "JohnMalkovich@gmail.com"
-            , phoneNumber = "4441122345"
-            , userGender = "Female"
-            , dayOfBirth = "01"
-            , monthOfBirth = "February"
-            , yearOfBirth = "1994"
-            , subjectMath = "Math"
-            , hobbySport = "Sports"
-            , nameOfImg = "img.jpg"
-            , address = "17 Dean St, Brooklyn, NY 11201, USA"
-            , state = "NCR"
-            , city = "Delhi";
+    Faker faker = new Faker();
+    private final String userName = faker.name().firstName();
+    private final String lastName = faker.name().lastName();
+    private final String userEmail = faker.internet().emailAddress();
+    private String phoneNumber = faker.phoneNumber().subscriberNumber(10);
+    private final String userGender = "Female";
+    private final String[] dateList = generateDataForFormOfBirthday.generateDateOfBirth(18, 90); // generate date to array
+    private final String dayOfBirth = generateDataForFormOfBirthday.setDateOfBirth(dateList, "day");
+    private final String monthOfBirth = generateDataForFormOfBirthday.setDateOfBirth(dateList, "month");
+    private final String yearOfBirth = generateDataForFormOfBirthday.setDateOfBirth(dateList, "year");
+    private final String subjectMath = "Math";
+    private final String hobbie = "Sports";
+    private final String nameOfImg = "img.jpg";
+    private final String address = faker.address().fullAddress();
+    private final String state = "NCR";
+    private final String city = "Delhi";
 
     @Test
     void testForm() {
@@ -32,7 +35,7 @@ public class RegFormWithPageObj extends TestBase{
                 .setGender(userGender)
                 .setBirthDate(dayOfBirth, monthOfBirth, yearOfBirth)
                 .setSubject(subjectMath)
-                .setHobbies(hobbySport)
+                .setHobbies(hobbie)
                 .uploadImg(nameOfImg)
                 .setAddress(address)
                 .setState(state)
@@ -48,7 +51,7 @@ public class RegFormWithPageObj extends TestBase{
                 .verifyResults("Mobile", phoneNumber)
                 .verifyResults("Date of Birth", dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
                 .verifyResults("Subjects", subjectMath)
-                .verifyResults("Hobbies", hobbySport)
+                .verifyResults("Hobbies", hobbie)
                 .verifyResults("Picture", nameOfImg)
                 .verifyResults("Address", address)
                 .verifyResults("State and City", state + " " + city);

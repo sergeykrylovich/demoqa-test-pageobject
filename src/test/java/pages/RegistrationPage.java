@@ -87,7 +87,6 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setHobbies (String hobbie) {
-        //select all checkboxes of the 'Hobbies' field
         hobbiesSelector.$(byText(hobbie)).click(); // chose hobbie
 
         return this;
