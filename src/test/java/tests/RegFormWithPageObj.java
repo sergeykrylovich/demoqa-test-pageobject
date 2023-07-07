@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -25,6 +26,9 @@ public class RegFormWithPageObj extends TestBase{
     private final String city = "Delhi";
 
     @Test
+    @Owner(value = "Sergei Krylovich")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Fill demoqa form with data")
     void testForm() {
         //Form filling
         page.openPage()

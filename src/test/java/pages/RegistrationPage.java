@@ -1,6 +1,8 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 import pages.components.RegistrationResultModal;
 
@@ -15,6 +17,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
+
     CalendarComponent calendarComponent = new CalendarComponent();
     RegistrationResultModal registrationResultModal = new RegistrationResultModal();
     private static String urlForm = "/automation-practice-form";
@@ -32,6 +35,7 @@ public class RegistrationPage {
             , citySelector = $("#city")
             , submitSelector = $("#submit");
 
+    @Step("Open demoqa practice form")
     public RegistrationPage openPage() {
         open(urlForm);
         $("div.main-header").shouldHave(text("Practice Form"));
@@ -42,36 +46,42 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Set firstname: {firstName} in the form")
     public RegistrationPage setFirstName (String firstName) {
         firstNameSelector.setValue(firstName);
 
         return this;
     }
 
+    @Step("Set lastname: {lastName} in the form")
     public RegistrationPage setLastName (String lastName) {
         lastNameSelector.setValue(lastName);
 
         return this;
     }
 
+    @Step("Set  user email: {userEmail} in the form")
     public RegistrationPage setUserEmail (String userEmail) {
         userEmailSelector.setValue(userEmail);
 
         return this;
     }
 
+    @Step("Set phone number: {userNumber} in the form")
     public RegistrationPage setPhoneNumber (String userNumber) {
         phoneNumberSelector.setValue(userNumber);
 
         return this;
     }
 
+    @Step("Set gender: {userGender} in the form")
     public RegistrationPage setGender (String userGender) {
         genderSelector.$(byText(userGender)).click();
 
         return this;
     }
 
+    @Step("Set birthdate: {day}.{month}.{year} in the form")
     public RegistrationPage setBirthDate (String day, String month, String year) {
         birthDateSelector.click();
         calendarComponent.setDate(day, month, year);
