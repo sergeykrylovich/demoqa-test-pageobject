@@ -27,7 +27,7 @@ public class RegFormWithPageObj extends TestBase{
     private final String city = "Delhi";
 
     @Test
-    @Tag("remote test")
+    @Tag("remote_test")
     @Owner(value = "Sergei Krylovich")
     @Severity(SeverityLevel.NORMAL)
     @Story("Fill demoqa form with data")
