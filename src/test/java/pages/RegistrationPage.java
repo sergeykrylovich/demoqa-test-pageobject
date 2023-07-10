@@ -89,6 +89,7 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Set subject: {subject} in the form")
     public RegistrationPage setSubject (String subject) {
         //add data to the 'Subjects' field
         subjectSelector.setValue(subject).pressEnter();
@@ -96,12 +97,14 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Set hobbies: {hobbie} in the form")
     public RegistrationPage setHobbies (String hobbie) {
         hobbiesSelector.$(byText(hobbie)).click(); // chose hobbie
 
         return this;
     }
 
+    @Step("Upload image in the form")
     public RegistrationPage uploadImg (String nameOfImg) {
         //uploading file for picture
         //File file = new File("src/test/resources/img/img.jpg");
@@ -111,12 +114,14 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Set address: {address} in the form")
     public RegistrationPage setAddress (String address) {
         addressSelector.setValue(address); // Set Current Address
 
         return this;
     }
 
+    @Step("Set state: {state} in the form")
     public RegistrationPage setState (String state) {
         stateSelector.click();
         stateSelector.$(byText(state)).click();
@@ -126,6 +131,7 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Set city: {city} in the form")
     public RegistrationPage setCity (String city) {
         citySelector.click();
         citySelector.$(byText(city)).click();
@@ -134,19 +140,21 @@ public class RegistrationPage {
 
         return this;
     }
-
+    @Step("Submit the form")
     public RegistrationPage submitForm () {
         submitSelector.click(); // submit form
 //        $("#submit").click(withTimeout(Duration.ofSeconds(1)));//  wait 1 sec and submit
         return this;
     }
 
+    @Step("Verify that modal is appear")
     public RegistrationPage verifyModalResults () {
         registrationResultModal.verifyModalAppear();
 
         return this;
     }
 
+    @Step("Verify field {key} is equal to {value}")
     public RegistrationPage verifyResults (String key, String value) {
         registrationResultModal.verifyResultsInModal(key, value);
 

@@ -2,6 +2,7 @@ package tests;
 
 import com.github.javafaker.Faker;
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -26,9 +27,11 @@ public class RegFormWithPageObj extends TestBase{
     private final String city = "Delhi";
 
     @Test
+    @Tag("remote test")
     @Owner(value = "Sergei Krylovich")
     @Severity(SeverityLevel.NORMAL)
     @Story("Fill demoqa form with data")
+    @Description("Test demoqa form with positive data")
     void testForm() {
         //Form filling
         page.openPage()
