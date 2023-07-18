@@ -24,7 +24,7 @@ public class TestBase {
         browserVersion = System.getProperty("version", "100");//"100.0";
         baseUrl = "https://demoqa.com";
         browserSize = System.getProperty("browserSize", "1920x1080");//"1920x1080";
-        remote = System.getProperty("remoteUrl");//"https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        remote = System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud/wd/hub");//"https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
